@@ -15,40 +15,40 @@
 <style>
   .app {
     background-image: url("./autumnbg.jpg");
-    height: 100%;
+    min-height: 100%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
+    padding-bottom: 20px;
   }
   header {
     max-width: 960px;
     margin: 0 auto;
     padding: 1.3em 0 0.7em 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
   }
   h3,
   h1 {
     font-family: "Quicksand", sans-serif;
     color: white;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
     margin: 0;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
   }
   h3 {
-    font-size: 2em;
-    margin-bottom: 0.1em;
+    font-size: 1.8em;
+    margin-bottom: 0.3em;
   }
   h1 {
-    font-size: 3em;
+    font-size: 2.6em;
   }
 </style>
 
 <div class="app">
   <header>
-    <Logo size="100" color="white" />
-    <h3>Decoy School Useful Links {$location === '/admin' ? '(admin)' : ''}</h3>
+    <Logo size="80" color="white" />
+    <h3>
+      Decoy School Useful Links {$location === '/admin' ? '(Admin Page)' : ''}
+    </h3>
     <h1>Hello</h1>
   </header>
   <Router {routes} />

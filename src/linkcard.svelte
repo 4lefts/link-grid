@@ -6,9 +6,8 @@
   .link-card {
     font-family: "Quicksand", sans-serif;
     display: block;
-    height: 160px;
+    height: 130px;
     border-radius: 5px;
-    padding: 1em;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,8 +19,9 @@
   }
   .link-card a {
     color: white;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
     text-decoration: none;
+    margin: 1em;
   }
   .link-card h2 {
     text-align: center;

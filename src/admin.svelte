@@ -1,11 +1,12 @@
 <script>
+  import { fade } from "svelte/transition";
   import { links } from "./store.js";
 </script>
 
 <style>
   .admin-list {
     max-width: 960px;
-    margin: 0 auto;
+    margin: 10px auto;
   }
 
   table {
@@ -28,13 +29,15 @@
     padding: 1em;
   }
 
-  td.color-box {
+  td.color-box span {
     color: white;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
+    padding: 6px 12px;
+    border-radius: 5px;
   }
 </style>
 
-<div class="admin-list">
+<div in:fade={{ duration: 500 }} class="admin-list">
   <table>
     <thead>
       <tr>
@@ -48,8 +51,8 @@
         <tr>
           <td>{link.name}</td>
           <td>{link.href}</td>
-          <td class="color-box" style="background-color: {link.color};">
-            {link.color}
+          <td class="color-box">
+            <span style="background-color: {link.color};">{link.color}</span>
           </td>
         </tr>
       {/each}

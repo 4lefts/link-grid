@@ -5,8 +5,8 @@
 
 <style>
   svg {
-    -webkit-filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.5));
-    filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.5));
+    -webkit-filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.8));
+    filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.8));
   }
 </style>
 

@@ -9,3 +9,4 @@ To do:
 - Adding and removing links
 - Logos for links that provide them
 - File upload to firebase for logo images and background image
+- Image blur up (especially for background)

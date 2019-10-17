@@ -9,7 +9,7 @@ export const links = writable([
   },
   {
     name: "TT Rockstars",
-    href: "https://play.ttrockstars.com/auth/school/student/undefined",
+    href: "https://play.ttrockstars.com/auth/school/student/29696",
     color: "#673ab7"
   },
   {

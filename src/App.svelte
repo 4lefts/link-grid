@@ -46,9 +46,7 @@
 <div class="app">
   <header>
     <Logo size="80" color="white" />
-    <h3>
-      Decoy School Useful Links {$location === '/admin' ? '(Admin Page)' : ''}
-    </h3>
+    <h3>Decoy School Links {$location === '/admin' ? '(Admin Page)' : ''}</h3>
     <h1>Hello</h1>
   </header>
   <Router {routes} />

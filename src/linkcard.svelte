@@ -4,7 +4,6 @@
 
 <style>
   .link-card {
-    font-family: "Quicksand", sans-serif;
     display: block;
     height: 130px;
     border-radius: 5px;

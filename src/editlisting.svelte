@@ -4,6 +4,9 @@
   export let link;
 
   let isEditing = false;
+  $: editingStyle = isEditing
+    ? `box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);`
+    : ``;
 
   function update() {
     const newData = {
@@ -25,9 +28,8 @@
     width: 960px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     border-radius: 5px;
-    padding: 0.7em 1em;
+    padding: 1.2rem;
     margin: 0 0 10px 0;
-    border: 2px solid white;
   }
   .listing {
     cursor: pointer;
@@ -62,19 +64,22 @@
     text-align: center;
   }
 
-  .edit-box,
   label {
     display: flex;
     flex-direction: column;
   }
+  .edit-box {
+    display: flex;
+    flex-direction: column;
+  }
   label {
-    margin: 1em 0 0 0;
+    margin: 1.8rem 0 0 0;
   }
   input {
     font-family: inherit;
     font-size: 1.6rem;
-    margin-top: 0.4em;
-    padding: 0.7em 0.5em;
+    margin-top: 0.5rem;
+    padding: 1.2rem 0.7rem;
     border: 2px solid lightgrey;
     border-radius: 3px;
   }
@@ -85,7 +90,7 @@
   button {
     width: 100px;
     margin-top: 1em;
-    padding: 0.7em;
+    padding: 1rem;
     color: white;
     font-family: inherit;
     font-size: 1.8rem;
@@ -102,9 +107,7 @@
   }
 </style>
 
-<div
-  class="listing-wrapper"
-  style={`border-color: ${isEditing ? 'dodgerblue' : 'white'}`}>
+<div class="listing-wrapper" style={editingStyle}>
   <div class="listing" on:click={() => (isEditing = !isEditing)}>
     <div>{link.name}</div>
     <div class="href">{link.href}</div>

@@ -4,8 +4,8 @@ A super-simple web app for aggregating useful links into one page for schools. A
 
 To do:
 
-- Simple database backend with auth
-- Then admin workflow to allow editing links
+- ~~Simple database backend~~ **with auth** <- next!
+- ~~Then admin workflow to allow editing links~~
 - Adding and removing links
 - Logos for links that provide them
 - File upload to firebase for logo images and background image

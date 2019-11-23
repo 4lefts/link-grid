@@ -1,7 +1,20 @@
 <script>
+  import { onMount } from "svelte";
   import { fade } from "svelte/transition";
   import Linkcard from "./linkcard.svelte";
-  import { links } from "./store.js";
+  import { db } from "./firebase.js";
+  $: links = [];
+
+  onMount(() => {
+    db.collection("links")
+      .get()
+      .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+          links = [...links, doc.data()];
+        });
+      })
+      .catch(err => console.error(err));
+  });
 </script>
 
 <style>
@@ -16,7 +29,7 @@
 </style>
 
 <div in:fade={{ duration: 500 }} class="link-grid">
-  {#each $links as link (link.name)}
+  {#each links as link (link.name)}
     <Linkcard {link} />
   {/each}
 </div>

@@ -1,8 +1,22 @@
 <script>
   import { slide } from "svelte/transition";
+  import { db } from "./firebase.js";
   export let link;
 
   let isEditing = false;
+
+  function update() {
+    const newData = {
+      name: link.name,
+      href: link.href,
+      color: link.color
+    };
+    db.collection("links")
+      .doc(link.id)
+      .set(newData)
+      .then(() => console.log("link updated!"))
+      .catch(err => console.error(err));
+  }
 </script>
 
 <style>
@@ -47,6 +61,45 @@
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
     text-align: center;
   }
+
+  .edit-box,
+  label {
+    display: flex;
+    flex-direction: column;
+  }
+  label {
+    margin: 1em 0 0 0;
+  }
+  input {
+    font-family: inherit;
+    font-size: 1.6rem;
+    margin-top: 0.4em;
+    padding: 0.7em 0.5em;
+    border: 2px solid lightgrey;
+    border-radius: 3px;
+  }
+  input:focus {
+    border-color: dodgerblue;
+  }
+
+  button {
+    width: 100px;
+    margin-top: 1em;
+    padding: 0.7em;
+    color: white;
+    font-family: inherit;
+    font-size: 1.8rem;
+    background-color: dodgerblue;
+    border: 1px solid dodgerblue;
+    border-radius: 3px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+  button:hover {
+    background: #135a9f;
+    border-color: #135a9f;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  }
 </style>
 
 <div
@@ -60,6 +113,20 @@
     </div>
   </div>
   {#if isEditing}
-    <div transition:slide class="edit-box">Edit stuff will be here</div>
+    <div transition:slide class="edit-box">
+      <label>
+        Name:
+        <input type="text" bind:value={link.name} />
+      </label>
+      <label>
+        Address:
+        <input type="text" bind:value={link.href} />
+      </label>
+      <label>
+        Colour:
+        <input type="text" bind:value={link.color} />
+      </label>
+      <button on:click={update}>Update</button>
+    </div>
   {/if}
 </div>

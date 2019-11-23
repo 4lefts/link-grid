@@ -1,9 +1,27 @@
 <script>
+  import { onMount } from "svelte";
   import { fade } from "svelte/transition";
-  import { links } from "./store.js";
+  import { db } from "./firebase.js";
   import Editlisting from "./editlisting.svelte";
 
   const user = true;
+
+  $: links = [];
+
+  onMount(() => {
+    const unsubscribe = db.collection("links").onSnapshot(querySnapShot => {
+      const newLinks = [];
+      querySnapShot.forEach(doc => {
+        const newLink = {
+          id: doc.id,
+          ...doc.data()
+        };
+        newLinks.push(newLink);
+      });
+      links = [...newLinks];
+    });
+    return () => unsubscribe();
+  });
 </script>
 
 <style>
@@ -15,7 +33,7 @@
 
 {#if user}
   <div in:fade={{ duration: 500 }} class="list-wrapper">
-    {#each $links as link (link.name)}
+    {#each links as link (link.id)}
       <Editlisting {link} />
     {/each}
   </div>

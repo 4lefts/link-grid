@@ -1,12 +1,12 @@
 <script>
-  import { onMount } from "svelte";
   import { fade } from "svelte/transition";
-  import { db } from "./firebase.js";
+  import { db, auth, googleProvider } from "./firebase.js";
+  import SignIn from "./signIn.svelte";
   import EditLink from "./editLink.svelte";
   import AddNewLink from "./addNewLink.svelte";
   import MessageBox from "./messageBox.svelte";
 
-  const user = true;
+  let user = false;
 
   let isAddingNewLink,
     isShowingMessage = false;
@@ -15,8 +15,9 @@
 
   $: links = [];
 
-  onMount(() => {
-    const unsubscribe = db.collection("links").onSnapshot(querySnapShot => {
+  auth.onAuthStateChanged(u => {
+    user = u;
+    db.collection("links").onSnapshot(querySnapShot => {
       const newLinks = [];
       querySnapShot.forEach(doc => {
         const newLink = {
@@ -27,7 +28,6 @@
       });
       links = [...newLinks];
     });
-    return () => unsubscribe();
   });
 
   function showMessage(e) {
@@ -38,14 +38,13 @@
 </script>
 
 <style>
-  .list-wrapper {
+  .wrapper {
     position: relative;
     max-width: 960px;
     margin: 10px auto;
   }
 
   button {
-    width: 100%;
     height: 56px;
     padding: 1.2rem;
     color: white;
@@ -63,10 +62,19 @@
     border-color: #135a9f;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   }
+  button.new-link-button {
+    width: 100%;
+    margin-bottom: 1.6rem;
+  }
 </style>
 
-{#if user}
-  <div in:fade={{ duration: 500 }} class="list-wrapper">
+<div in:fade={{ duration: 500 }} class="wrapper">
+  {#if user}
+    <button
+      class="new-link-button"
+      on:click={() => (isAddingNewLink = !isAddingNewLink)}>
+      Add New Link
+    </button>
     {#if links.length}
       {#each links as link (link.id)}
         <EditLink
@@ -74,17 +82,17 @@
           on:linkUpdated={showMessage}
           on:deleteLink={showMessage} />
       {/each}
-      <button on:click={() => (isAddingNewLink = !isAddingNewLink)}>
-        Add New Link
-      </button>
+      <button on:click={() => auth.signOut()}>Sign Out</button>
     {:else}Loading...{/if}
-  </div>
-  {#if isAddingNewLink}
-    <AddNewLink
-      on:linkAdded={showMessage}
-      on:closeEdit={() => (isAddingNewLink = false)} />
+  {:else}
+    <SignIn />
   {/if}
-  {#if isShowingMessage}
-    <MessageBox {message} />
-  {/if}
+</div>
+{#if isAddingNewLink}
+  <AddNewLink
+    on:linkAdded={showMessage}
+    on:closeEdit={() => (isAddingNewLink = false)} />
+{/if}
+{#if isShowingMessage}
+  <MessageBox {message} />
 {/if}

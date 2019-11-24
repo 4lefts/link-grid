@@ -5,12 +5,13 @@ A super-simple web app for aggregating useful links into one page for schools. A
 To do:
 
 - ~~Simple database backend~~ **with auth** <- next!
+- add db rules and regex checking for only school staff emails
 - ~~Then admin workflow to allow editing links~~
 - ~~Adding and removing links~~
 - ~~confirm delete box~~
 - ~~add and update message box~~
 - Color picker
-- cancel edit option (press esc?)
+- cancel edit button (also press esc?)
 - favicon
 - loading component
 - Logos for links that provide them

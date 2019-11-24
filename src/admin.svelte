@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
   import { fade } from "svelte/transition";
   import { db } from "./firebase.js";
-  import Editlisting from "./editlisting.svelte";
+  import EditLink from "./editLink.svelte";
   import AddNewLink from "./addNewLink.svelte";
 
   const user = true;
@@ -59,14 +59,14 @@
   <div in:fade={{ duration: 500 }} class="list-wrapper">
     {#if links.length}
       {#each links as link (link.id)}
-        <Editlisting {link} />
+        <EditLink {link} />
       {/each}
       <button on:click={() => (addingNewLink = !addingNewLink)}>
-        Add new link
+        Add New Link
       </button>
     {:else}Loading...{/if}
   </div>
   {#if addingNewLink}
-    <AddNewLink on:cancel={() => (addingNewLink = false)} />
+    <AddNewLink on:closeEdit={() => (addingNewLink = false)} />
   {/if}
 {/if}

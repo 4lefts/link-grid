@@ -6,7 +6,9 @@ To do:
 
 - ~~Simple database backend~~ **with auth** <- next!
 - ~~Then admin workflow to allow editing links~~
-- Adding and removing links
+- ~~Adding and removing links~~
+- Color picker
+- loading component
 - Logos for links that provide them
 - File upload to firebase for logo images and background image
 - Image blur up (especially for background)

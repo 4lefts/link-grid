@@ -1,9 +1,11 @@
 <script>
   import { slide, fade } from "svelte/transition";
   import { db } from "./firebase.js";
+  import ConfirmDelete from "./confirmDelete.svelte";
   export let link;
 
-  let isEditing = false;
+  let isEditing,
+    confirmingDelete = false;
   $: editingStyle = isEditing
     ? `box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);`
     : ``;
@@ -19,6 +21,10 @@
       .set(newData)
       .then(() => console.log("link updated!"))
       .catch(err => console.error(err));
+  }
+
+  function confirmDelete() {
+    confirmingDelete = true;
   }
 
   function deleteLink() {
@@ -155,8 +161,13 @@
       </label>
       <div>
         <button on:click={update}>Update</button>
-        <button on:click={deleteLink} class="delete">Delete Link</button>
+        <button on:click={confirmDelete} class="delete">Delete Link</button>
       </div>
     </div>
   {/if}
 </div>
+{#if confirmingDelete}
+  <ConfirmDelete
+    on:closeConfirmModal={() => (confirmingDelete = false)}
+    on:deleteLink={deleteLink} />
+{/if}

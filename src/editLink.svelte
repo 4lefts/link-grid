@@ -26,7 +26,10 @@
       .then(() => {
         dispatch("linkUpdated", "Link Updated!");
       })
-      .catch(err => console.error(err));
+      .catch(err => {
+        console.error(err);
+        dispatch("error", "Sorry, an error occured");
+      });
   }
 
   function confirmDelete() {
@@ -40,7 +43,10 @@
       .then(() => {
         dispatch("deleteLink", "Link Deleted!");
       })
-      .catch(err => console.error(err));
+      .catch(err => {
+        console.error(err);
+        dispatch("error", "Sorry, an error occured");
+      });
   }
 </script>
 

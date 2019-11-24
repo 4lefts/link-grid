@@ -20,7 +20,10 @@
       .then(docRef => {
         dispatch("linkAdded", "Link Added!");
       })
-      .catch(err => console.error(err));
+      .catch(err => {
+        console.error(err);
+        dispatch("error", "Sorry, an error occured");
+      });
     newLink = {
       name: "",
       href: "",

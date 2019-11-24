@@ -1,7 +1,7 @@
 <script>
   import { createEventDispatcher } from "svelte";
   import { db } from "./firebase.js";
-  import { fade } from "svelte/transition";
+  import Modal from "./modal.svelte";
   const dispatch = createEventDispatcher();
 
   let newLink = {
@@ -9,10 +9,6 @@
     href: "",
     color: ""
   };
-
-  function handleKeydown(e) {
-    if (e.keyCode === 27) closeEdit();
-  }
 
   function closeEdit() {
     dispatch("closeEdit");
@@ -33,25 +29,6 @@
 </script>
 
 <style>
-  .outer {
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0, 0, 0, 0.7);
-  }
-  .inner {
-    max-width: 960px;
-    background: white;
-    padding: 4rem 2rem;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-  }
   h2 {
     margin: 0;
   }
@@ -102,26 +79,22 @@
   }
 </style>
 
-<svelte:window on:keydown={handleKeydown} />
-
-<div in:fade={{ duration: 200 }} out:fade={{ duration: 300 }} class="outer">
-  <div in:fade={{ duration: 500 }} out:fade={{ duration: 100 }} class="inner">
-    <h2>Add a new link:</h2>
-    <label>
-      Name:
-      <input type="text" bind:value={newLink.name} autofocus />
-    </label>
-    <label>
-      Address:
-      <input type="text" bind:value={newLink.href} />
-    </label>
-    <label>
-      Colour:
-      <input type="text" bind:value={newLink.color} />
-    </label>
-    <div>
-      <button on:click={submit}>Submit</button>
-      <button on:click={closeEdit} class="cancel">Cancel</button>
-    </div>
+<Modal on:closeModal={closeEdit}>
+  <h2>Add a new link:</h2>
+  <label>
+    Name:
+    <input type="text" bind:value={newLink.name} />
+  </label>
+  <label>
+    Address:
+    <input type="text" bind:value={newLink.href} />
+  </label>
+  <label>
+    Colour:
+    <input type="text" bind:value={newLink.color} />
+  </label>
+  <div>
+    <button on:click={submit}>Submit</button>
+    <button on:click={closeEdit} class="cancel">Cancel</button>
   </div>
-</div>
+</Modal>

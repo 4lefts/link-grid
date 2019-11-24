@@ -4,10 +4,15 @@
   import { db } from "./firebase.js";
   import EditLink from "./editLink.svelte";
   import AddNewLink from "./addNewLink.svelte";
+  import MessageBox from "./messageBox.svelte";
 
   const user = true;
 
-  let addingNewLink = false;
+  let isAddingNewLink,
+    isShowingMessage = false;
+
+  let message = "";
+
   $: links = [];
 
   onMount(() => {
@@ -24,6 +29,12 @@
     });
     return () => unsubscribe();
   });
+
+  function showMessage(e) {
+    message = e.detail;
+    isShowingMessage = true;
+    setTimeout(() => (isShowingMessage = false), 1500);
+  }
 </script>
 
 <style>
@@ -36,7 +47,6 @@
   button {
     width: 100%;
     height: 56px;
-    /* margin-top: 1em; */
     padding: 1.2rem;
     color: white;
     font-family: inherit;
@@ -59,14 +69,22 @@
   <div in:fade={{ duration: 500 }} class="list-wrapper">
     {#if links.length}
       {#each links as link (link.id)}
-        <EditLink {link} />
+        <EditLink
+          {link}
+          on:linkUpdated={showMessage}
+          on:deleteLink={showMessage} />
       {/each}
-      <button on:click={() => (addingNewLink = !addingNewLink)}>
+      <button on:click={() => (isAddingNewLink = !isAddingNewLink)}>
         Add New Link
       </button>
     {:else}Loading...{/if}
   </div>
-  {#if addingNewLink}
-    <AddNewLink on:closeEdit={() => (addingNewLink = false)} />
+  {#if isAddingNewLink}
+    <AddNewLink
+      on:linkAdded={showMessage}
+      on:closeEdit={() => (isAddingNewLink = false)} />
+  {/if}
+  {#if isShowingMessage}
+    <MessageBox {message} />
   {/if}
 {/if}

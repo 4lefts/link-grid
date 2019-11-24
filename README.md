@@ -7,9 +7,11 @@ To do:
 - ~~Simple database backend~~ **with auth** <- next!
 - ~~Then admin workflow to allow editing links~~
 - ~~Adding and removing links~~
-- confirm delete box
-- add and update message box
+- ~~confirm delete box~~
+- ~~add and update message box~~
 - Color picker
+- cancel edit option (press esc?)
+- favicon
 - loading component
 - Logos for links that provide them
 - File upload to firebase for logo images and background image

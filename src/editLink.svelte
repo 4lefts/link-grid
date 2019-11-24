@@ -1,11 +1,15 @@
 <script>
+  import { createEventDispatcher } from "svelte";
   import { slide, fade } from "svelte/transition";
   import { db } from "./firebase.js";
   import ConfirmDelete from "./confirmDelete.svelte";
+
   export let link;
 
+  const dispatch = createEventDispatcher();
+
   let isEditing,
-    confirmingDelete = false;
+    isConfirmingDelete = false;
   $: editingStyle = isEditing
     ? `box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);`
     : ``;
@@ -19,19 +23,23 @@
     db.collection("links")
       .doc(link.id)
       .set(newData)
-      .then(() => console.log("link updated!"))
+      .then(() => {
+        dispatch("linkUpdated", "Link Updated!");
+      })
       .catch(err => console.error(err));
   }
 
   function confirmDelete() {
-    confirmingDelete = true;
+    isConfirmingDelete = true;
   }
 
   function deleteLink() {
     db.collection("links")
       .doc(link.id)
       .delete()
-      .then(() => console.log("link deleted!"))
+      .then(() => {
+        dispatch("deleteLink", "Link Deleted!");
+      })
       .catch(err => console.error(err));
   }
 </script>
@@ -166,8 +174,8 @@
     </div>
   {/if}
 </div>
-{#if confirmingDelete}
+{#if isConfirmingDelete}
   <ConfirmDelete
-    on:closeConfirmModal={() => (confirmingDelete = false)}
+    on:closeConfirmModal={() => (isConfirmingDelete = false)}
     on:deleteLink={deleteLink} />
 {/if}

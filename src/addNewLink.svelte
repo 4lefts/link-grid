@@ -17,7 +17,9 @@
   function submit() {
     db.collection("links")
       .add(newLink)
-      .then(docRef => console.log("link added!"))
+      .then(docRef => {
+        dispatch("linkAdded", "Link Added!");
+      })
       .catch(err => console.error(err));
     newLink = {
       name: "",

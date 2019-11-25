@@ -6,7 +6,8 @@
   import AddNewLink from "./addNewLink.svelte";
   import MessageBox from "./messageBox.svelte";
 
-  let user = false;
+  let user = null;
+  let admins = ["sball@decoyschool.co.uk"];
 
   let isAddingNewLink,
     isShowingMessage = false;
@@ -17,23 +18,33 @@
 
   auth.onAuthStateChanged(u => {
     user = u;
-    db.collection("links").onSnapshot(querySnapShot => {
-      const newLinks = [];
-      querySnapShot.forEach(doc => {
-        const newLink = {
-          id: doc.id,
-          ...doc.data()
-        };
-        newLinks.push(newLink);
+    if (user && admins.includes(user.email)) {
+      db.collection("links").onSnapshot(querySnapShot => {
+        const newLinks = [];
+        querySnapShot.forEach(doc => {
+          const newLink = {
+            id: doc.id,
+            ...doc.data()
+          };
+          newLinks.push(newLink);
+        });
+        links = [...newLinks];
       });
-      links = [...newLinks];
-    });
+    } else if (user) {
+      auth.signOut();
+      showMessage("Sorry, that's not a valid admin account", 3000);
+    }
   });
 
-  function showMessage(e) {
-    message = e.detail;
+  function handleMessageEvent(e) {
+    const msg = e.detail;
+    showMessage(msg);
+  }
+
+  function showMessage(msg, dur = 1500) {
+    message = msg;
     isShowingMessage = true;
-    setTimeout(() => (isShowingMessage = false), 1500);
+    setTimeout(() => (isShowingMessage = false), dur);
   }
 </script>
 
@@ -45,7 +56,7 @@
   }
 
   button {
-    height: 56px;
+    min-width: 100px;
     padding: 1.2rem;
     color: white;
     font-family: inherit;
@@ -64,6 +75,7 @@
   }
   button.new-link-button {
     width: 100%;
+    height: 56px;
     margin-bottom: 1.6rem;
   }
 </style>
@@ -73,24 +85,24 @@
     <button
       class="new-link-button"
       on:click={() => (isAddingNewLink = !isAddingNewLink)}>
-      Add New Link
+      &plus; Add New Link
     </button>
     {#if links.length}
       {#each links as link (link.id)}
         <EditLink
           {link}
-          on:linkUpdated={showMessage}
-          on:deleteLink={showMessage} />
+          on:linkUpdated={handleMessageEvent}
+          on:deleteLink={handleMessageEvent} />
       {/each}
-      <button on:click={() => auth.signOut()}>Sign Out</button>
     {:else}Loading...{/if}
+    <button on:click={() => auth.signOut()}>Sign Out</button>
   {:else}
     <SignIn />
   {/if}
 </div>
 {#if isAddingNewLink}
   <AddNewLink
-    on:linkAdded={showMessage}
+    on:linkAdded={handleMessageEvent}
     on:closeEdit={() => (isAddingNewLink = false)} />
 {/if}
 {#if isShowingMessage}

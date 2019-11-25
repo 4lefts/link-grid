@@ -21,6 +21,7 @@
   p {
     font-size: 1.8rem;
     font-weight: 600;
+    margin-bottom: 3.6rem;
   }
   button {
     width: 100%;

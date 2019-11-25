@@ -24,7 +24,7 @@
     max-width: 960px;
     min-width: 360px;
     background: white;
-    padding: 4rem 2rem;
+    padding: 3.6rem 2rem;
     border-radius: 5px;
     display: flex;
     flex-direction: column;

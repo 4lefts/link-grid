@@ -15,7 +15,6 @@
   }
   button {
     width: 100px;
-    margin-top: 1em;
     padding: 1rem;
     color: white;
     font-family: inherit;

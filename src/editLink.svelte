@@ -30,6 +30,7 @@
         console.error(err);
         dispatch("error", "Sorry, an error occured");
       });
+    isEditing = false;
   }
 
   function confirmDelete() {

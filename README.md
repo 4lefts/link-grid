@@ -4,7 +4,7 @@ A super-simple web app for aggregating useful links into one page for schools. A
 
 To do:
 
-- ~~Simple database backend~~ **with auth** <- next!
+- ~~Simple database backend **with auth**~~
 - add db rules and regex checking for only school staff emails
 - ~~Then admin workflow to allow editing links~~
 - ~~Adding and removing links~~

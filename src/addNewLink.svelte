@@ -1,14 +1,29 @@
 <script>
   import { createEventDispatcher } from "svelte";
   import { db } from "./firebase.js";
+  import { HsvPicker } from "svelte-color-picker";
   import Modal from "./modal.svelte";
   const dispatch = createEventDispatcher();
 
   let newLink = {
     name: "",
     href: "",
-    color: ""
+    color: "#000000"
   };
+
+  function updateColor(e) {
+    // convert rgb values to hex
+    let r = e.detail.r.toString(16);
+    let g = e.detail.g.toString(16);
+    let b = e.detail.b.toString(16);
+
+    // pad start of single digit values
+    if (r.length === 1) r = `0${r}`;
+    if (g.length === 1) g = `0${g}`;
+    if (b.length === 1) b = `0${b}`;
+
+    console.log(`#${r}${g}${b}`);
+  }
 
   function closeEdit() {
     dispatch("closeEdit");
@@ -97,6 +112,10 @@
   <label>
     Colour:
     <input type="text" bind:value={newLink.color} />
+  </label>
+  <label>
+    Colour:
+    <HsvPicker on:colorChange={updateColor} bind:startColor={newLink.color} />
   </label>
   <div>
     <button on:click={submit}>Submit</button>

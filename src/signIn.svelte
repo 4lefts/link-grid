@@ -1,12 +1,25 @@
 <script>
+  import { createEventDispatcher } from "svelte";
   import { auth, googleProvider } from "./firebase.js";
+  import Loader from "./loader.svelte";
+
+  const dispatch = createEventDispatcher();
+
+  let isLoading = false;
 
   import { fade } from "svelte/transition";
   function signIn() {
+    isLoading = true;
     auth
       .signInWithPopup(googleProvider)
-      .then()
-      .catch(err => console.error(err));
+      .then(() => {
+        isLoading = false;
+      })
+      .catch(err => {
+        console.error(err);
+        dispatch("error", "Sorry, an error occured");
+        isLoading = false;
+      });
   }
 </script>
 
@@ -44,7 +57,11 @@
   }
 </style>
 
-<div>
-  <p>You are not signed in.</p>
-  <button class="sign-in-button" on:click={signIn}>Sign In</button>
-</div>
+{#if isLoading}
+  <Loader />
+{:else}
+  <div>
+    <p>You are not signed in.</p>
+    <button class="sign-in-button" on:click={signIn}>Sign In</button>
+  </div>
+{/if}

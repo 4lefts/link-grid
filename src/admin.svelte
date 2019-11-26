@@ -5,6 +5,7 @@
   import EditLink from "./editLink.svelte";
   import AddNewLink from "./addNewLink.svelte";
   import MessageBox from "./messageBox.svelte";
+  import Loader from "./loader.svelte";
 
   let user = null;
   let admins = ["sball@decoyschool.co.uk"];
@@ -94,12 +95,15 @@
           on:linkUpdated={handleMessageEvent}
           on:deleteLink={handleMessageEvent} />
       {/each}
-    {:else}Loading...{/if}
+    {:else}
+      <Loader />
+    {/if}
     <button on:click={() => auth.signOut()}>Sign Out</button>
   {:else}
     <SignIn />
   {/if}
 </div>
+
 {#if isAddingNewLink}
   <AddNewLink
     on:linkAdded={handleMessageEvent}

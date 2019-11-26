@@ -1,8 +1,9 @@
 <script>
   import { onMount } from "svelte";
   import { fade } from "svelte/transition";
-  import Linkcard from "./linkcard.svelte";
   import { db } from "./firebase.js";
+  import Linkcard from "./linkcard.svelte";
+  import Loader from "./loader.svelte";
   $: links = [];
 
   onMount(() => {
@@ -28,8 +29,12 @@
   }
 </style>
 
-<div in:fade={{ duration: 500 }} class="link-grid">
-  {#each links as link (link.name)}
-    <Linkcard {link} />
-  {/each}
-</div>
+{#if links.length}
+  <div in:fade={{ duration: 500 }} class="link-grid">
+    {#each links as link (link.name)}
+      <Linkcard {link} />
+    {/each}
+  </div>
+{:else}
+  <Loader />
+{/if}

@@ -10,10 +10,10 @@ To do:
 - ~~Adding and removing links~~
 - ~~confirm delete box~~
 - ~~add and update message box~~
-- Color picker
+- Color picker <- work in progress
 - cancel edit button (also press esc?)
 - favicon
-- loading component
+- ~~loading component~~
 - Logos for links that provide them
 - File upload to firebase for logo images and background image
 - Image blur up (especially for background)

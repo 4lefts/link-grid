@@ -161,6 +161,9 @@
     background-color: firebrick;
     border-color: firebrick;
   }
+  .color-picker {
+    margin-top: 0.5rem;
+  }
 </style>
 
 <div in:fade={{ duration: 200 }} class="listing-wrapper" style={editingStyle}>
@@ -185,7 +188,11 @@
       </label>
       <label>
         Colour:
-        <HsvPicker on:colorChange={updateColor} bind:startColor={link.color} />
+        <div class="color-picker">
+          <HsvPicker
+            on:colorChange={updateColor}
+            bind:startColor={link.color} />
+        </div>
       </label>
       <div>
         <button on:click={update}>Update</button>

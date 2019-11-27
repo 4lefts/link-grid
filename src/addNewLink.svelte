@@ -114,10 +114,12 @@
     Address:
     <input type="text" bind:value={newLink.href} />
   </label>
-  <label>Colour:</label>
-  <div class="color-picker">
-    <HsvPicker on:colorChange={updateColor} bind:startColor={newLink.color} />
-  </div>
+  <label>
+    Colour:
+    <div class="color-picker">
+      <HsvPicker on:colorChange={updateColor} bind:startColor={newLink.color} />
+    </div>
+  </label>
   <div>
     <button on:click={submit}>Submit</button>
     <button on:click={closeEdit} class="cancel">Cancel</button>

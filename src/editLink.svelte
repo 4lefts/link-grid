@@ -2,6 +2,8 @@
   import { createEventDispatcher } from "svelte";
   import { slide, fade } from "svelte/transition";
   import { db } from "./firebase.js";
+
+  import { HsvPicker } from "svelte-color-picker";
   import ConfirmDelete from "./confirmDelete.svelte";
 
   export let link;
@@ -13,6 +15,20 @@
   $: editingStyle = isEditing
     ? `box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);`
     : ``;
+
+  function updateColor(e) {
+    // convert rgb values to hex
+    let r = e.detail.r.toString(16);
+    let g = e.detail.g.toString(16);
+    let b = e.detail.b.toString(16);
+
+    // pad start of single digit values
+    if (r.length === 1) r = `0${r}`;
+    if (g.length === 1) g = `0${g}`;
+    if (b.length === 1) b = `0${b}`;
+
+    link.color = `#${r}${g}${b}`;
+  }
 
   function update() {
     const newData = {
@@ -169,7 +185,7 @@
       </label>
       <label>
         Colour:
-        <input type="text" bind:value={link.color} />
+        <HsvPicker on:colorChange={updateColor} bind:startColor={link.color} />
       </label>
       <div>
         <button on:click={update}>Update</button>

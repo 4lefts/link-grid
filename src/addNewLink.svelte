@@ -8,7 +8,7 @@
   let newLink = {
     name: "",
     href: "",
-    color: "#000000"
+    color: "#BC2828"
   };
 
   function updateColor(e) {
@@ -22,7 +22,9 @@
     if (g.length === 1) g = `0${g}`;
     if (b.length === 1) b = `0${b}`;
 
-    console.log(`#${r}${g}${b}`);
+    const newColor = `#${r}${g}${b}`;
+    console.log(newColor);
+    newLink.color = newColor;
   }
 
   function closeEdit() {
@@ -97,6 +99,9 @@
     background-color: firebrick;
     border-color: firebrick;
   }
+  .color-picker {
+    margin-top: 0.5rem;
+  }
 </style>
 
 <Modal on:closeModal={closeEdit}>
@@ -109,14 +114,10 @@
     Address:
     <input type="text" bind:value={newLink.href} />
   </label>
-  <label>
-    Colour:
-    <input type="text" bind:value={newLink.color} />
-  </label>
-  <label>
-    Colour:
+  <label>Colour:</label>
+  <div class="color-picker">
     <HsvPicker on:colorChange={updateColor} bind:startColor={newLink.color} />
-  </label>
+  </div>
   <div>
     <button on:click={submit}>Submit</button>
     <button on:click={closeEdit} class="cancel">Cancel</button>

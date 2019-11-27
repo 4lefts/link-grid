@@ -1,5 +1,6 @@
 <script>
   import { createEventDispatcher } from "svelte";
+  import { fade } from "svelte/transition";
   import { auth, googleProvider } from "./firebase.js";
   import Loader from "./loader.svelte";
 
@@ -7,7 +8,6 @@
 
   let isLoading = false;
 
-  import { fade } from "svelte/transition";
   function signIn() {
     isLoading = true;
     auth
@@ -60,7 +60,7 @@
 {#if isLoading}
   <Loader />
 {:else}
-  <div>
+  <div in:fade={{ duration: 200 }}>
     <p>You are not signed in.</p>
     <button class="sign-in-button" on:click={signIn}>Sign In</button>
   </div>

@@ -147,10 +147,7 @@
   }
 </style>
 
-<div
-  transition:fade={{ duration: 200 }}
-  class="listing-wrapper"
-  style={editingStyle}>
+<div in:fade={{ duration: 200 }} class="listing-wrapper" style={editingStyle}>
   <div class="listing" on:click={() => (isEditing = !isEditing)}>
     <div>
       <b>{link.name}</b>

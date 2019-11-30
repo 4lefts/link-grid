@@ -10,7 +10,7 @@ To do:
 - ~~Adding and removing links~~
 - ~~confirm delete box~~
 - ~~add and update message box~~
-- Color picker <- work in progress
+- ~~Color picker~~
 - cancel edit button (also press esc?)
 - favicon
 - ~~loading component~~

@@ -12,11 +12,11 @@
   &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe
   UI&quot;, Arial,
   sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px"
-  href="https://unsplash.com/@chrislawton?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge"
+  href="https://unsplash.com/@bobcanning?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge"
   target="_blank"
   rel="noopener noreferrer"
-  title="Download free do whatever you want high-resolution photos from Chris
-  Lawton">
+  title="Download free do whatever you want high-resolution photos from Bob
+  Canning">
   <span style="display:inline-block;padding:2px 3px">
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -26,5 +26,5 @@
       <path d="M10 9V0h12v9H10zm12 5h10v18H0V14h10v9h12v-9z" />
     </svg>
   </span>
-  <span style="display:inline-block;padding:2px 3px">Chris Lawton</span>
+  <span style="display:inline-block;padding:2px 3px">Bob Canning</span>
 </a>

@@ -5,15 +5,16 @@ A super-simple web app for aggregating useful links into one page for schools. A
 To do:
 
 - ~~Simple database backend **with auth**~~
-- add db rules and regex checking for only school staff emails
+- ~~add db rules and regex checking for only school staff emails~~
 - ~~Then admin workflow to allow editing links~~
 - ~~Adding and removing links~~
 - ~~confirm delete box~~
 - ~~add and update message box~~
 - ~~Color picker~~
-- cancel edit button (also press esc?)
-- favicon
+- ~~cancel edit button (also press esc?)~~
 - ~~loading component~~
+- favicon
+- up and down buttons to reorder links? requires restructuring data?
 - Logos for links that provide them
 - File upload to firebase for logo images and background image
 - Image blur up (especially for background)

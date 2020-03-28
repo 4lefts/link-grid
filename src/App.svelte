@@ -15,7 +15,7 @@
 
 <style>
   .app {
-    background-image: url("./winterbg.jpg");
+    background-image: url("./springbg.jpg");
     min-height: 100%;
     background-position: center;
     background-repeat: no-repeat;

@@ -15,7 +15,7 @@
 
 <style>
   .app {
-    background-image: url("./springbg.jpg");
+    background-image: url("./autumn2020bg.jpg");
     min-height: 100%;
     background-position: center;
     background-repeat: no-repeat;
@@ -51,5 +51,7 @@
     <h1>Hello</h1>
   </header>
   <Router {routes} />
-  <Bgcredit />
+  <Bgcredit
+    creditUrl={`https://unsplash.com/@aaronburden?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText`}
+    photographerName={`Aaron Burden`} />
 </div>

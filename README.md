@@ -15,6 +15,5 @@ To do:
 - ~~loading component~~
 - favicon
 - up and down buttons to reorder links? requires restructuring data?
-- Logos for links that provide them
-- File upload to firebase for logo images and background image
+- Logos for links that provide them - how does Google Keep etc generate thumbnails?
 - Image blur up (especially for background)

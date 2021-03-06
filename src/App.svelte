@@ -9,13 +9,26 @@
   const routes = {
     "/": Linkgrid,
     "/admin": Admin,
-    "*": Linkgrid
+    "*": Linkgrid,
   };
 </script>
 
+<div class="app">
+  <header>
+    <Logo size="80" color="white" />
+    <h3>Decoy School Links {$location === "/admin" ? "(Admin Page)" : ""}</h3>
+    <h1>Hello</h1>
+  </header>
+  <Router {routes} />
+  <Bgcredit
+    creditUrl={`https://unsplash.com/@yoksel?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Yoksel 🌿 Zok</a> on <a href="https://unsplash.com/s/photos/daffodils?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText`}
+    photographerName={`Yoksel Zok`}
+  />
+</div>
+
 <style>
   .app {
-    background-image: url("./autumn2020bg.jpg");
+    background-image: url("/bgs/spring2021bg.jpg");
     min-height: 100%;
     background-position: center;
     background-repeat: no-repeat;
@@ -43,15 +56,3 @@
     font-size: 2.6em;
   }
 </style>
-
-<div class="app">
-  <header>
-    <Logo size="80" color="white" />
-    <h3>Decoy School Links {$location === '/admin' ? '(Admin Page)' : ''}</h3>
-    <h1>Hello</h1>
-  </header>
-  <Router {routes} />
-  <Bgcredit
-    creditUrl={`https://unsplash.com/@aaronburden?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText`}
-    photographerName={`Aaron Burden`} />
-</div>
